@@ -5,8 +5,18 @@
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+
+export default {
+    computed: {
+        ...mapGetters({
+            UserInfo: ''
+        })
+    },
+    created() {
+         this.$store.dispatch('FETCH_USER');
+    }
 }
 </script>
 
