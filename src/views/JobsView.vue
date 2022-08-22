@@ -1,26 +1,21 @@
 <template>
-    <div>
-        <p v-for="job in JobItems" v-bind:key="job">
-            <a :href="job.url">{{job.title}}</a>
-            <small>{{ job.time_ago }} by {{ job.domain }}}</small>
-        </p>
-    </div>
+   <list-item></list-item>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import ListItem from '../components/ListItem.vue'
+// import ListMixin from '../mixins/ListMixin';
+
 export default {
-    computed: {
-        ...mapGetters({
-            JobItems: 'fetchedJobs'
-        })
-    },  
-    created() {
-        this.$store.dispatch('FETCH_JOBS');
-    }
+    components: {
+        ListItem
+    },
+    // mixins: [ListMixin]
+    // created() {
+    //     this.$store.dispatch('FETCH_JOBS');
+    // }
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>

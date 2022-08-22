@@ -4,26 +4,57 @@ import AskView from '../views/AskView.vue';
 import JobsView from '../views/JobsView.vue';
 import UserView from '../views/UserView.vue';
 import ItemView from '../views/ItemView.vue';
+import { store } from '../store/index';
 
 const routes = [
     {
         path: '/news',
-        component: NewsView
+        name: 'news',
+        component: NewsView,
+        beforeEnter: (to, from, next) => {
+            store.dispatch('FETCH_LIST', to.name)
+                .then(() => {
+                    console.log('fetched');
+                    next();
+                }).catch((error) => {
+                    console.log(error);
+                }); 
+        }
     },
     {
         path: '/ask',
-        component: AskView
+        name: 'ask',
+        component: AskView,
+        beforeEnter: (to, from, next) => {
+            store.dispatch('FETCH_LIST', to.name)
+                .then(() => {
+                    console.log('fetched');
+                    next();
+                }).catch((error) => {
+                    console.log(error);
+                }); 
+        }
     },
     {
         path: '/jobs',
-        component: JobsView
+        name: 'jobs',
+        component: JobsView,
+        beforeEnter: (to, from, next) => {
+            store.dispatch('FETCH_LIST', to.name)
+                .then(() => {
+                    console.log('fetched');
+                    next();
+                }).catch((error) => {
+                    console.log(error);
+                }); 
+        }
     },
     {
         path: '/user/:id',
         component: UserView
     },
     {
-        path: '/item',
+        path: '/item/:id',
         component: ItemView
     }
 ]

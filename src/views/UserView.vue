@@ -1,21 +1,29 @@
 <template>
     <div>
-        UserView
+        <UserProfile>
+            <template v-slot:username>{{ userInfo.id }}</template>
+            <template v-slot:time><span>Posted {{ userInfo.created }}</span></template>
+            <template v-slot:karma><span>{{ userInfo.karma }}</span></template>
+        </UserProfile>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-
+import UserProfile from '../components/UserProfile.vue';
 
 export default {
+    components: {
+        UserProfile
+    },
     computed: {
         ...mapGetters({
-            UserInfo: ''
+            userInfo: 'fetchedUser', 
         })
     },
     created() {
-         this.$store.dispatch('FETCH_USER');
+        const userName = this.$route.params.id;
+        this.$store.dispatch('FETCH_USER', userName);
     }
 }
 </script>
